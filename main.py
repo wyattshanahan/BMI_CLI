@@ -1,4 +1,4 @@
-def processInput(rawHeight):
+def processRawHeight(rawHeight):
     rawHeight = rawHeight.split(",") #split heightRAW to an array of the ft, in
     feet = float(rawHeight[0]) # element 0 is ft, convert to float
     inch = float(rawHeight[1]) # element 1 is inches, convert to float
@@ -11,7 +11,7 @@ def imperialToMetric(weight, heightIN):
     heightM = heightM * heightM # BMI requires square metres
     return weight, heightM
 
-def outputBMI(inputBMI):
+def categoriseBMI(inputBMI):
     if (inputBMI < 18.5):
         BMIcat = "Underweight"
     elif (18.5 <= inputBMI < 25.0): #using < rather than <= to ensure coverage
@@ -23,6 +23,7 @@ def outputBMI(inputBMI):
     else:
         print("Error processing your BMI, please validate your input.")
         raise ValueError
+    return BMIcat
 
 print("===============================================")
 print("Welcome to the BMI Calculator")
@@ -30,11 +31,12 @@ print("\n(C)2024 Wyatt Shanahan")
 print("===============================================")
 weight = float(input("Enter your weight in pounds: ")) # read in weight and height
 heightRAW = input("Enter your height in feet and inches using a comma to separate the two: ") #read in height as foot, inches to be split and processed
-heightIN = processInput(heightRAW)
-weight, heightM = imperialToMetric(weight, heightIN)
+heightIN = processRawHeight(heightRAW) #process raw height, outputs the height in inches
+weight, heightM = imperialToMetric(weight, heightIN) #converts from imperial to metric
 BMI = weight / heightM #BMI is weight/height
-category = outputBMI(BMI)
-print(f"Weight: {weight} height^2 {heightM} BMI: {BMI}")
+category = categoriseBMI(BMI)
+print(f"\nYour BMI is {BMI:.1f}\nYour BMI category is {category}")
+waitToExit = input("\nPress Enter to exit...") # prevents program from exiting til the user says to
 
 #print(f"Weight: {weight} ft {heightFT} in{heightIN}")
 
@@ -42,6 +44,4 @@ print(f"Weight: {weight} height^2 {heightM} BMI: {BMI}")
 # todo: validate input
 # todo: finish output formatting
 # todo: make the input and welcome formatting improved
-# todo: round floats in BMI to 2 decimal (?)
 # todo: validate input early on
-# todo: add exit loop
