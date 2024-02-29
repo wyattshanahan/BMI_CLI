@@ -10,8 +10,8 @@ heightRAW = input("Enter your height in feet and inches using a comma to separat
 
 heightIN = processRawHeight(heightRAW) #process raw height, outputs the height in inches
 weight, heightM = imperialToMetric(weight, heightIN) #converts from imperial to metric
-BMI = weight / heightM #BMI is weight/height
-category = categoriseBMI(BMI)
+BMI = calculateBMI(weight, heightM) #calculate BMI
+category = categoriseBMI(BMI) #categorise BMI
 
 
 print(f"\nYour BMI is {BMI:.1f}\nYour BMI category is {category}")

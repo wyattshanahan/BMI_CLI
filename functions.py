@@ -36,3 +36,8 @@ def categoriseBMI(inputBMI):
         print("Error processing your BMI, please validate your input.")
         exit("ValueError")
     return BMIcat
+
+#calculates the BMI
+def calculateBMI(weight, height):
+    BMI = float(weight)/float(height)
+    return BMI
