@@ -1,3 +1,4 @@
+import pytest
 from functions import * #import functions from calculator.py
 
 # tests for categoriseBMI
@@ -79,3 +80,66 @@ def test_imperialToMetric_invalid_str():
 
 def test_imperialToMetric_invalid_invalid():
     assert imperialToMetric("onefifty","onefifty") == "Error processing weight input"
+
+#tests for calculateBMI - checks types int, flt, string, and invalid string for each input combination
+def test_calculateBMI_int_int():
+    assert calculateBMI(67,14) == 4.785714285714286
+
+def test_calculateBMI_int_flt():
+    assert calculateBMI(67,14.0) == 4.785714285714286
+
+def test_calculateBMI_int_str():
+    assert calculateBMI(67,"14") == 4.785714285714286
+
+def test_calculateBMI_int_invalid():
+    with pytest.raises(ValueError) as exc_info:
+        calculateBMI(67, "fourteen")
+    assert str(exc_info.value) == "Error converting your inputs"
+
+def test_calculateBMI_flt_int():
+    assert calculateBMI(67.0,14) == 4.785714285714286
+
+def test_calculateBMI_flt_flt():
+    assert calculateBMI(67.0,14.0) == 4.785714285714286
+
+def test_calculateBMI_flt_str():
+    assert calculateBMI(67.0,"14") == 4.785714285714286
+
+def test_calculateBMI_flt_invalid():
+    with pytest.raises(ValueError) as exc_info:
+        calculateBMI(67.0, "fourteen")
+    assert str(exc_info.value) == "Error converting your inputs"
+
+def test_calculateBMI_str_int():
+    assert calculateBMI("67",14) == 4.785714285714286
+
+def test_calculateBMI_str_flt():
+    assert calculateBMI("67",14.0) == 4.785714285714286
+
+def test_calculateBMI_str_str():
+    assert calculateBMI("67","14") == 4.785714285714286
+
+def test_calculateBMI_str_invalid():
+    with pytest.raises(ValueError) as exc_info:
+        calculateBMI("67", "fourteen")
+    assert str(exc_info.value) == "Error converting your inputs"
+
+def test_calculateBMI_invalid_int():
+    with pytest.raises(ValueError) as exc_info:
+        calculateBMI("sixtyseven", 14)
+    assert str(exc_info.value) == "Error converting your inputs"
+
+def test_calculateBMI_invalid_flt():
+    with pytest.raises(ValueError) as exc_info:
+        calculateBMI("sixtyseven", 14.0)
+    assert str(exc_info.value) == "Error converting your inputs"
+
+def test_calculateBMI_invalid_str():
+    with pytest.raises(ValueError) as exc_info:
+        calculateBMI("sixtyseven", "14")
+    assert str(exc_info.value) == "Error converting your inputs"
+
+def test_calculateBMI_invalid_invalid():
+    with pytest.raises(ValueError) as exc_info:
+        calculateBMI("sixtyseven", "fourteen")
+    assert str(exc_info.value) == "Error converting your inputs"
