@@ -2,10 +2,10 @@ import pytest
 from functions import * #import functions from calculator.py
 #unit tests for processRawHeight
 def test_processRawHeight_comma():
-    assert processRawHeight("12,6") == 150
+    assert processRawHeight("12,6") == 150.0
 
 def test_processRawHeight_space():
-    assert processRawHeight("12 6") == 150
+    assert processRawHeight("12 6") == 150.0
 
 def test_processRawHeight_invalid():
     with pytest.raises(ValueError) as exc_info:
@@ -13,7 +13,7 @@ def test_processRawHeight_invalid():
     assert str(exc_info.value) == "Error parsing height"
 
 def test_processRawHeight_threevals():
-    assert processRawHeight("12,6,12") == 150
+    assert processRawHeight("12,6,12") == 150.0
 
 def test_processRawHeight_oneval():
     with pytest.raises(IndexError) as exc_info:
