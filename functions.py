@@ -7,13 +7,11 @@ def processRawHeight(rawHeight):
             rawHeight = rawHeight[0].split()  # try splitting on a space
             feet = float(rawHeight[0])  # element 0 is ft, convert to float
         except: #if spaces and comma failed, then throw an error and abort execution
-            print("\nError parsing your height, please validate your input.")
-            exit("ParseError") #exit and report a parsing error
+            raise ValueError("Error parsing height") #raise error and exit
     try:
         inch = float(rawHeight[1]) # element 1 is inches, convert to float
     except IndexError:
-        print("\nError processing your height, please validate your input.") #exit and report an indexing error
-        exit("IndexError")
+        raise IndexError("Error processing your height, please validate your input") #raise error and exit
     totalIN = inch + (feet * 12) # convert and add feet to totalIN
     return totalIN #return totalIN
 
@@ -40,8 +38,7 @@ def categoriseBMI(inputBMI):
     elif (30.0 <= inputBMI):
         BMIcat = "Obese"
     else:
-        print("Error processing your BMI, please validate your input.")
-        exit("ValueError")
+        raise ValueError("Error calculating your BMI")
     return BMIcat
 
 #calculates the BMI
@@ -49,5 +46,5 @@ def calculateBMI(weight, height):
     try:
         BMI = float(weight)/float(height)
     except:
-        return("Error converting your inputs")
+        raise ValueError("Error converting your inputs")
     return BMI
