@@ -18,8 +18,15 @@ def processRawHeight(rawHeight):
     return totalIN #return totalIN
 
 def imperialToMetric(weight, heightIN):
-    weight = float(weight) * 0.45 # convert pounds to kilogrammes
-    heightM = float(heightIN) * 0.025 #convert total inches into metres
+    try:
+        weight = float(weight) * 0.45 # convert pounds to kilogrammes
+    except:
+        print("Error processing weight input")
+        return("Error processing weight input")
+    try:
+        heightM = float(heightIN) * 0.025 #convert total inches into metres
+    except:
+        return("Error processing height input")
     heightM = heightM * heightM # BMI requires square metres
     return weight, heightM
 
@@ -39,5 +46,8 @@ def categoriseBMI(inputBMI):
 
 #calculates the BMI
 def calculateBMI(weight, height):
-    BMI = float(weight)/float(height)
+    try:
+        BMI = float(weight)/float(height)
+    except:
+        return("Error converting your inputs")
     return BMI
