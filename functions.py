@@ -29,6 +29,10 @@ def imperialToMetric(weight, heightIN):
     return weight, heightM
 
 def categoriseBMI(inputBMI):
+    try:
+        inputBMI = float(inputBMI) #done to ensure comparisons work
+    except:
+        raise ValueError("Error converting your inputs") #if conversion fails, then raise error
     if (inputBMI < 18.5):
         BMIcat = "Underweight"
     elif (18.5 <= inputBMI < 25.0): #using < rather than <= to ensure coverage
