@@ -30,3 +30,52 @@ def test_categorise_30_0(): # test the boundary at 30.0
 
 def test_categorise_39_25(): # test the "interior" point for values over the boundary at 30.0
     assert categoriseBMI(39.25) == "Obese"
+
+# unit tests for imperialToMetric testing type combinations for both inputs
+def test_imperialToMetric_int_int():
+    assert imperialToMetric(150,150) == (67.5,14.0625)
+
+def test_imperialToMetric_int_flt():
+    assert imperialToMetric(150,150.0) == (67.5,14.0625)
+
+def test_imperialToMetric_int_str():
+    assert imperialToMetric(150,"150") == (67.5,14.0625)
+
+def test_imperialToMetric_int_invalid():
+    assert imperialToMetric(150,"onefifty") == "Error processing height input"
+
+def test_imperialToMetric_flt_int():
+    assert imperialToMetric(150.0,150) == (67.5,14.0625)
+
+def test_imperialToMetric_flt_flt():
+    assert imperialToMetric(150.0,150.0) == (67.5,14.0625)
+
+def test_imperialToMetric_flt_str():
+    assert imperialToMetric(150.0,"150") == (67.5,14.0625)
+
+def test_imperialToMetric_flt_invalid():
+    assert imperialToMetric(150.0,"onefifty") == "Error processing height input"
+
+def test_imperialToMetric_str_int():
+    assert imperialToMetric("150",150) == (67.5,14.0625)
+
+def test_imperialToMetric_str_flt():
+    assert imperialToMetric("150",150.0) == (67.5,14.0625)
+
+def test_imperialToMetric_str_str():
+    assert imperialToMetric("150","150") == (67.5,14.0625)
+
+def test_imperialToMetric_str_invalid():
+    assert imperialToMetric("150","onefifty") == "Error processing height input"
+
+def test_imperialToMetric_invalid_int():
+    assert imperialToMetric("onefifty",150) == "Error processing weight input"
+
+def test_imperialToMetric_invalid_flt():
+    assert imperialToMetric("onefifty",150.0) == "Error processing weight input"
+
+def test_imperialToMetric_invalid_str():
+    assert imperialToMetric("onefifty","150") == "Error processing weight input"
+
+def test_imperialToMetric_invalid_invalid():
+    assert imperialToMetric("onefifty","onefifty") == "Error processing weight input"
