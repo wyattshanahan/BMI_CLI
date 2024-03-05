@@ -1,7 +1,7 @@
 import pytest
 from functions import * #import functions from calculator.py
 
-# tests for categoriseBMI
+# boundary tests for categoriseBMI
 def test_categorise_9_25(): # test the "interior" point for underweight
     assert categoriseBMI(9.25) == "Underweight"
 
@@ -31,6 +31,21 @@ def test_categorise_30_0(): # test the boundary at 30.0
 
 def test_categorise_39_25(): # test the "interior" point for values over the boundary at 30.0
     assert categoriseBMI(39.25) == "Obese"
+# unit tests for categoriseBMi to verify input types
+def test_categorise_int():
+    assert categoriseBMI(30) == "Obese"
+
+def test_categorise_flt():
+    assert categoriseBMI(30.0) == "Obese"
+
+def test_categorise_str():
+    assert categoriseBMI("30") == "Obese"
+
+def test_categorise_invalid():
+    with pytest.raises(ValueError) as exc_info:
+        categoriseBMI("thirty")
+    assert str(exc_info.value) == "Error converting your inputs"
+
 
 # unit tests for imperialToMetric testing type combinations for both inputs
 def test_imperialToMetric_int_int():
@@ -80,6 +95,8 @@ def test_imperialToMetric_invalid_str():
 
 def test_imperialToMetric_invalid_invalid():
     assert imperialToMetric("onefifty","onefifty") == "Error processing weight input"
+
+
 
 #tests for calculateBMI - checks types int, flt, string, and invalid string for each input combination
 def test_calculateBMI_int_int():
