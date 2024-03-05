@@ -1,5 +1,25 @@
 import pytest
 from functions import * #import functions from calculator.py
+#unit tests for processRawHeight
+def test_processRawHeight_comma():
+    assert processRawHeight("12,6") == 150
+
+def test_processRawHeight_space():
+    assert processRawHeight("12 6") == 150
+
+def test_processRawHeight_invalid():
+    with pytest.raises(ValueError) as exc_info:
+        processRawHeight("twelvefootsix")
+    assert str(exc_info.value) == "Error parsing height"
+
+def test_processRawHeight_threevals():
+    assert processRawHeight("12,6,12") == 150
+
+def test_processRawHeight_oneval():
+    with pytest.raises(IndexError) as exc_info:
+        processRawHeight("12")
+    assert str(exc_info.value) == "Error processing your height, please validate your input"
+
 
 # boundary tests for categoriseBMI
 def test_categorise_9_25(): # test the "interior" point for underweight
